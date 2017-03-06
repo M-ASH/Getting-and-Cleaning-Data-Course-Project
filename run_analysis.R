@@ -76,15 +76,20 @@ write.csv(tidy, file = "tidy.csv")
 
 #create a codebook for the data set 
 
-codebook <- codebook(tidy)
+#codebook <- codebook(tidy)
 
-capture.output(codebook, file = "codebook.txt")
+#capture.output(codebook, file = "codebook.txt")
 
 ## calculate mean of means as per guidance in step 5
 
 compositemeans <- aggregate(tidy$value, list(subject = tidy$subject, activity = tidy$activity, variable = tidy$variable), mean)
 
+codebook <- codebook(compositemeans)
+
 colnames(compositemeans) <- c("subject","activity", "variable", "means") 
 
 write.csv(compositemeans, file = "cm.csv")
+
+capture.output(codebook, file = "codebook.txt")
+
 
